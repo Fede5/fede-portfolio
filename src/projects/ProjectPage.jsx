@@ -3,13 +3,25 @@ import { useParams, Link } from "react-router-dom";
 const projectDetails = {
   "avd-automation": {
     title: "AVD Deployment Automation with Bicep",
-    description: "Infrastructure as Code project for deploying an AVD environment using Bicep and PowerShell scripts, including host pool, session hosts, workspaces, and FSLogix integration.",
-    technologies: ["Azure", "AVD", "Bicep", "PowerShell"],
+    description: "Infrastructure as Code project for deploying a full Azure Virtual Desktop environment using Bicep and PowerShell.",
+    technologies: ["Azure", "AVD", "Bicep", "PowerShell", "FSLogix"],
+    steps: [
+      "Define host pool, app group, and workspace in a Bicep template.",
+      "Automate publishing of the app group using PowerShell.",
+      "Integrate FSLogix profiles with Azure Files or Azure NetApp Files.",
+    ],
+    github: "https://github.com/Fede5/avd-deployment",
   },
   "zero-trust": {
     title: "Zero Trust Landing Zone for Microsoft 365",
-    description: "A foundational setup applying Zero Trust principles using Conditional Access, Intune, and Azure AD. Includes baseline policies and secure score optimization.",
-    technologies: ["Azure AD", "Microsoft 365", "Conditional Access", "Intune"],
+    description: "A secure-by-default environment leveraging Conditional Access, Intune security baselines, and Microsoft Graph automation.",
+    technologies: ["Azure AD", "Microsoft 365", "Conditional Access", "Intune", "Graph API"],
+    steps: [
+      "Block legacy authentication using Conditional Access policies.",
+      "Deploy Intune secure baselines using Graph API and PowerShell.",
+      "Define user and device compliance policies aligned with Zero Trust.",
+    ],
+    github: "https://github.com/Fede5/zero-trust-landing-zone",
   },
   "cloud-cost-dashboard": {
     title: "Cloud Cost Optimization Dashboard",
@@ -39,14 +51,41 @@ export default function ProjectPage() {
       <Link to="/" className="text-indigo-600 hover:underline">&larr; Back to Projects</Link>
       <h1 className="text-3xl font-bold text-indigo-700">{project.title}</h1>
       <p className="text-slate-700">{project.description}</p>
-      <div>
-        <h2 className="text-lg font-semibold mt-4">Technologies Used:</h2>
-        <ul className="list-disc list-inside text-slate-600">
-          {project.technologies.map((tech) => (
-            <li key={tech}>{tech}</li>
-          ))}
-        </ul>
-      </div>
+
+      {project.technologies && (
+        <div>
+          <h2 className="text-lg font-semibold mt-4">Technologies Used:</h2>
+          <ul className="list-disc list-inside text-slate-600">
+            {project.technologies.map((tech) => (
+              <li key={tech}>{tech}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {project.steps && (
+        <div>
+          <h2 className="text-lg font-semibold mt-4">Implementation Highlights:</h2>
+          <ul className="list-disc list-inside text-slate-600">
+            {project.steps.map((step, i) => (
+              <li key={i}>{step}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {project.github && (
+        <div className="pt-4">
+          <a
+            href={project.github}
+            target="_blank"
+            rel="noreferrer"
+            className="text-indigo-600 text-sm underline hover:text-indigo-800"
+          >
+            View on GitHub →
+          </a>
+        </div>
+      )}
     </div>
   );
 }
