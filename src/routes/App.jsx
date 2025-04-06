@@ -1,18 +1,18 @@
 import { Route, Routes } from "react-router-dom";
 import Home from "./Home";
-import ProjectPage from "../projects/ProjectPage";
 import Contact from "./Contact";
 import ThankYou from "./ThankYou";
+import ProjectPage from "../projects/ProjectPage";
 
-export default function App() {
+function App() {
   return (
-<div className="min-h-screen bg-slate-50 text-slate-800 dark:bg-slate-900 dark:text-white">
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/projects/:id" element={<ProjectPage />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/thanks" element={<ThankYou />} />
-      </Routes>
-    </div>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/contact" element={<Contact />} />
+      <Route path="/thankyou" element={<ThankYou />} />
+      <Route path="/projects/:id" element={<ProjectPage />} />
+    </Routes>
   );
 }
+
+export default App;
