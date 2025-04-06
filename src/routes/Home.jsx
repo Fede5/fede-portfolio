@@ -2,6 +2,10 @@ import { Link } from "react-router-dom";
 import projects from "../data/projects";
 
 export default function Home() {
+  const toggleDarkMode = () => {
+    document.documentElement.classList.toggle("dark");
+  };
+
   return (
     <main className="max-w-5xl mx-auto p-6 space-y-10">
       <header className="space-y-2">
@@ -9,13 +13,21 @@ export default function Home() {
         <p className="text-slate-700 dark:text-slate-300">
           Senior Cloud Engineer · Azure Specialist · VDI & Modern Workplace Expert
         </p>
-        <a
-          href="/fede-portfolio/Harry_Argote_Portfolio_CV.pdf"
-          target="_blank"
-          className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-xl hover:bg-indigo-700 transition"
-        >
-          Download CV (PDF)
-        </a>
+        <div className="flex items-center gap-4">
+          <a
+            href="/fede-portfolio/Harry_Argote_Portfolio_CV.pdf"
+            target="_blank"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-xl hover:bg-indigo-700 transition"
+          >
+            Download CV (PDF)
+          </a>
+          <button
+            onClick={toggleDarkMode}
+            className="px-4 py-2 rounded-xl border border-indigo-600 text-indigo-600 dark:border-indigo-300 dark:text-indigo-300"
+          >
+            Toggle Theme
+          </button>
+        </div>
       </header>
 
       <section>
@@ -38,7 +50,6 @@ export default function Home() {
                   </span>
                 ))}
               </div>
-
               <div className="flex gap-4 items-center mt-4">
                 <Link
                   to={`/projects/${project.id}`}
@@ -46,7 +57,6 @@ export default function Home() {
                 >
                   View Details →
                 </Link>
-
                 {project.github && (
                   <a
                     href={project.github}
